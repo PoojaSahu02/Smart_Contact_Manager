@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::Layout(~{::section})">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Settings Page</title>
+</head>
+
+<body>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card mr-5">
+						<div class="card-body ">
+							<h2 class="text-center m-3">Change Password</h2>
+							<div th:if="${session.message}" class="col-md-10 offset-md-1">
+								<div th:classappend="${'alert-'+session.message.type}" class="alert text-center"
+									role="alert">
+									<span th:text="${session.message.content}"></span>
+								</div>
+								<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+							</div>
+							<form th:action="@{/user/change-password}" method="post">
+								<!--old password field-->
+								<div class="form-group">
+									<label for="Old Password">Old Password</label>
+									<input name="oldPassword" id="Old Password" type="password" class="form-control"
+										placeholder="Enter old password" />
+								</div>
+								<!--new password field-->
+								<div class="form-group">
+									<label for="new Password">New Password</label>
+									<input name="newPassword" id="new Password" type="password" class="form-control"
+										placeholder="Enter new password" />
+								</div>
+								<div class="container text-center">
+									<button type="submit" class="btn btn-info bg-primary">Change</button>
+									<button type="reset" class="btn btn-info bg-primary ml-3">Reset</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			$(document).ready(() => {
+				$(".item").removeClass("active");
+				$("#settings-link").addClass("active");
+			});
+		</script>
+	</section>
+
+</body>
+
+</html>
